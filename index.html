@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WAS / WERE – Practice</title>
+<style>
+:root{box-sizing:border-box;--bg:#fbf4f1;--card:#fff;--ink:#2b2220;--mut:#7a6a66;--acc:#c0504d;--ok:#2e8b57;--okbg:#e3f4ea;--no:#c0392b;--nobg:#fbe4e1;--line:#e6d5d0;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1e1918;--card:#2a2321;--ink:#f3e9e6;--mut:#b9a8a3;--acc:#e07a76;--ok:#6fcf97;--okbg:#1f3a2b;--no:#ff8a7d;--nobg:#47231f;--line:#443835}}
+:root[data-theme="dark"]{--bg:#1e1918;--card:#2a2321;--ink:#f3e9e6;--mut:#b9a8a3;--acc:#e07a76;--ok:#6fcf97;--okbg:#1f3a2b;--no:#ff8a7d;--nobg:#47231f;--line:#443835}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;line-height:1.45}
+.wrap{max-width:640px;margin:0 auto;padding:16px}
+h1{font-size:24px;margin:8px 0 4px}
+.sub{color:var(--mut);margin:0 0 16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:16px 0}
+.card h2{font-size:18px;margin:0 0 4px;color:var(--acc)}
+.card p.t{margin:0 0 12px;color:var(--mut);font-size:15px}
+.q{padding:12px 0;border-top:1px solid var(--line)}
+.q:first-of-type{border-top:0}
+.s{font-size:17px;margin-bottom:8px}
+.blank{display:inline-block;min-width:56px;border-bottom:2px solid var(--acc);text-align:center;font-weight:700}
+button{font:inherit;min-height:44px;padding:8px 18px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;margin:0 6px 6px 0}
+button.pri{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+button.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:700}
+button.no{background:var(--nobg);border-color:var(--no);color:var(--no)}
+button:disabled{opacity:.9}
+.fb{font-size:15px;min-height:20px;margin-top:2px}
+.fb.ok{color:var(--ok)}.fb.no{color:var(--no)}
+.chip{display:inline-block}
+.build{min-height:52px;border:2px dashed var(--line);border-radius:12px;padding:6px;margin-bottom:8px}
+textarea{width:100%;min-height:64px;font:inherit;padding:10px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink);margin-top:6px}
+.score{font-weight:700;color:var(--acc)}
+.disc{background:var(--okbg);border-radius:12px;padding:12px;margin-top:12px;font-size:15px}
+footer{text-align:center;color:var(--mut);margin:24px 0 8px;font-size:14px}
+</style></head><body>
+<div class="wrap">
+<h1>WAS / WERE</h1>
+<p class="sub">Past of the verb <b>to be</b> · Read first, then decide.</p>
+
+<div class="card"><h2>1 · Which one fits the story?</h2>
+<p class="t">Think about <b>who</b> and <b>when</b>. Tap was or were. <span class="score" id="s1"></span></p>
+<div id="a1"></div></div>
+
+<div class="card"><h2>2 · Spot the mistake</h2>
+<p class="t">Is the sentence correct or wrong? <span class="score" id="s2"></span></p>
+<div id="a2"></div></div>
+
+<div class="card"><h2>3 · Build the question</h2>
+<p class="t">Tap the words in order. Then answer with a short answer. <span class="score" id="s3"></span></p>
+<div id="a3"></div></div>
+
+<div class="card"><h2>4 · True for you?</h2>
+<p class="t">Decide if each sentence is true for you. If not, make it true!</p>
+<div id="a4"></div>
+<div class="disc"><b>Now talk:</b> Ask your teacher (or a friend) 3 questions: <i>Were you at…? Was your…?</i> Answer with <i>Yes, I was / No, I wasn't.</i></div></div>
+
+<footer>@teacherpalomafonseca</footer>
+</div>
+<script>
+var A1=[
+["Yesterday I","was","tired after work.","I = singular → was"],
+["My parents","were","at the supermarket last night.","They = plural → were"],
+["She","was","at home on Sunday.","She → was"],
+["You and Lucas","were","in the same class in 2020.","You + Lucas = plural → were"],
+["It","was","very cold last winter.","It → was"],
+["We","were","happy at the party.","We → were"],
+["Maria, you","were","late yesterday!","You → always were"],
+["The movie","was","really good.","The movie = it → was"]
+];
+var A2=[
+["You was happy yesterday.",false,"You were happy yesterday."],
+["He was at home last night.",true,""],
+["They was at the supermarket.",false,"They were at the supermarket."],
+["We were tired after the trip.",true,""],
+["It were a great day.",false,"It was a great day."],
+["I was not at school yesterday.",true,""]
+];
+var A3=[
+["Were you at the supermarket yesterday ?","Were you at the supermarket yesterday?","Yes, I was. / No, I wasn't."],
+["Was he at home yesterday ?","Was he at home yesterday?","Yes, he was. / No, he wasn't."],
+["Were they at the party last night ?","Were they at the party last night?","Yes, they were. / No, they weren't."],
+["Was she tired after class ?","Was she tired after class?","Yes, she was. / No, she wasn't."]
+];
+var A4=[
+"Yesterday I was at home all day.",
+"Last weekend I was very tired.",
+"My best friend was in my class in school.",
+"My family was at the supermarket yesterday.",
+"Last night my friends were online."
+];
+var sc1=0,sc2=0,sc3=0;
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!==undefined)e.textContent=x;return e}
+function shuffle(a){var b=a.slice(),i,j,t;for(i=b.length-1;i>0;i--){j=Math.floor(Math.random()*(i+1));t=b[i];b[i]=b[j];b[j]=t}return b}
+function tap(b,f){var d=false;b.addEventListener('touchend',function(e){e.preventDefault();d=true;f()},{passive:false});b.addEventListener('click',function(){if(d){d=false;return}f()})}
+
+function init1(){
+ var box=document.getElementById('a1');
+ A1.forEach(function(it){
+  var q=el('div','q'),s=el('div','s'),bl=el('span','blank','___');
+  s.appendChild(document.createTextNode(it[0]+' '));s.appendChild(bl);s.appendChild(document.createTextNode(' '+it[2]));
+  var fb=el('div','fb'),done=false,bs=[];
+  ['was','were'].forEach(function(w){
+   var b=el('button','',w);bs.push(b);
+   tap(b,function(){
+    if(done)return;
+    if(w===it[1]){done=true;b.className='ok';bl.textContent=w;fb.className='fb ok';fb.textContent='✓ '+it[3];sc1++;document.getElementById('s1').textContent=sc1+'/'+A1.length;}
+    else{b.className='no';fb.className='fb no';fb.textContent='Think about the subject and try again.';}
+   });
+   q.appendChild(b);
+  });
+  q.insertBefore(s,q.firstChild);q.appendChild(fb);box.appendChild(q);
+ });
+}
+function init2(){
+ var box=document.getElementById('a2');
+ A2.forEach(function(it){
+  var q=el('div','q'),s=el('div','s',it[0]),fb=el('div','fb'),done=false;
+  q.appendChild(s);
+  [['Correct',true],['Wrong',false]].forEach(function(o){
+   var b=el('button','',o[0]);
+   tap(b,function(){
+    if(done)return;done=true;
+    if(o[1]===it[1]){b.className='ok';fb.className='fb ok';fb.textContent=it[1]?'✓ Yes, it is correct.':'✓ Right! Better: '+it[2];sc2++;document.getElementById('s2').textContent=sc2+'/'+A2.length;}
+    else{b.className='no';fb.className='fb no';fb.textContent=it[1]?'It is correct as it is.':'Not quite. Better: '+it[2];}
+   });
+   q.appendChild(b);
+  });
+  q.appendChild(fb);box.appendChild(q);
+ });
+}
+function init3(){
+ var box=document.getElementById('a3');
+ A3.forEach(function(it){
+  var words=it[0].split(' '),target=it[1],q=el('div','q'),build=el('div','build'),pool=el('div',''),fb=el('div','fb'),picked=[];
+  var chk=el('button','pri','Check'),rst=el('button','','Reset');
+  function render(){
+   build.innerHTML='';pool.innerHTML='';
+   picked.forEach(function(p,i){var b=el('button','',p.w);tap(b,function(){picked.splice(i,1);render()});build.appendChild(b)});
+   shuffle0.forEach(function(w,i){var used=false,k;for(k=0;k<picked.length;k++){if(picked[k].i===i)used=true}
+    if(!used){var b=el('button','',w);tap(b,function(){picked.push({w:w,i:i});render()});pool.appendChild(b)}});
+  }
+  var shuffle0=shuffle(words);
+  tap(chk,function(){
+   var s=picked.map(function(p){return p.w}).join(' ').replace(' ?','?').trim();
+   if(s===target){fb.className='fb ok';fb.textContent='✓ Great! Answer: '+it[2];if(!q.done){q.done=true;sc3++;document.getElementById('s3').textContent=sc3+'/'+A3.length}}
+   else{fb.className='fb no';fb.textContent='Not yet. Remember: the verb to be goes first!'}
+  });
+  tap(rst,function(){picked=[];fb.textContent='';render()});
+  q.appendChild(build);q.appendChild(pool);q.appendChild(chk);q.appendChild(rst);q.appendChild(fb);box.appendChild(q);render();
+ });
+}
+function init4(){
+ var box=document.getElementById('a4');
+ A4.forEach(function(t){
+  var q=el('div','q'),s=el('div','s',t),ta=el('textarea'),fb=el('div','fb');
+  ta.style.display='none';ta.placeholder='Make it true for you (use was / were)…';
+  var y=el('button','','True'),n=el('button','','Not true');
+  tap(y,function(){y.className='ok';n.className='';ta.style.display='none';fb.className='fb ok';fb.textContent='Nice! Tell a classmate more about it.'});
+  tap(n,function(){n.className='no';y.className='';ta.style.display='block';fb.textContent=''});
+  q.appendChild(s);q.appendChild(y);q.appendChild(n);q.appendChild(ta);q.appendChild(fb);box.appendChild(q);
+ });
+}
+window.addEventListener('load',function(){init1();init2();init3();init4()});
+</script>
+</body></html>
